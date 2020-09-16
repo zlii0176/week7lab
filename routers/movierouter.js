@@ -1,5 +1,5 @@
-//post /movies =>insert a movie
-//get /movies => get all movies
+//post /movies =>insert a movie &&
+//get /movies => get all movies &&
 //get /movies/:year1/:year2 =>get movies between year1 and year2
 //delete /movies/:id => delete a movie by id
 //put /movies/:mId/:aId => remove a actor from a movie or put?
@@ -19,8 +19,14 @@ module.exports={
         });
 
         movie.save(function(err,data){
-            if(err) res.send(err);
-            else res.send(data);
+            if(err) res.json(err);
+            else res.json(data);
+        });
+    },
+
+    getAllMovies:function(req,res){
+        Movie.find({}).populate("actors").exec(function(err,data){
+            res.json(data);
         });
     },
 
@@ -31,5 +37,4 @@ module.exports={
 
 
 
-    
 }

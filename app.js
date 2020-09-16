@@ -23,6 +23,7 @@ let actorRouter=require('./routers/actorrouter');
 let movieRouter = require('./routers/movierouter');
 
 
+
 let app = express();
 app.listen(8080);
 app.use(bodyParser.json());
@@ -40,7 +41,9 @@ mongoose.connect(DB_URL,function(err){
 
 //actor's endpoints
 app.post('/actors',actorRouter.insertActor);
+app.get("/actors",actorRouter.getAllActors);
 
 
 //movie's endpoints
 app.post('/movies',movieRouter.insertMovie);
+app.get('/movies',movieRouter.getAllMovies);

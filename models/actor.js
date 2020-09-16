@@ -3,7 +3,7 @@ let actorSchema = new mongoose.Schema({
     _id: mongoose.Types.ObjectId,
     name:String,
     bYear:Number,
-    movie:[{
+    movies:[{
         type:mongoose.Types.ObjectId,
         ref:"Movie"
     }]
