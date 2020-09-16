@@ -52,3 +52,5 @@ app.get('/movies',movieRouter.getAllMovies);
 app.delete("/movies/:id",movieRouter.deleteMovie);
 app.put("/movies/actors/:mId",movieRouter.addActor);
 app.put("/movies/:mId/:aId",movieRouter.removeActor);
+app.get('/movies/:year1/:year2',movieRouter.getMovieByYear);
+app.delete('/movies/:year1/:year2',movieRouter.deleteMovieByYear);
