@@ -6,7 +6,7 @@
 //post /movies/actors/mId => ("id"=sqfas) aId add actors to moviex &&
 //delete /movies/year1/year2 => delete all movie between year1 and year 2 &&
 
-//2,6,9,10
+//2,10
 
 let mongoose = require("mongoose");
 let Movie = require("../models/movie");
@@ -74,7 +74,10 @@ module.exports={
     }, 
     deleteMovieByYear:function(req,res){
         Movie.deleteMany({}).where("year").gte(req.params.year1).lte(req.params.year2).exec(function(err,data){
-            if (!err) res.json(data);
+            if (!err) {
+                res.json(data);
+                console.log(req.params.year1+'_'+req.params.year2);
+            }
         })
     }
 

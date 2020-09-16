@@ -6,6 +6,7 @@
 
 let mongoose = require("mongoose");
 let Actor = require("../models/actor");
+let Movie = require("../models/movie")
 
 
 module.exports={
@@ -35,9 +36,12 @@ module.exports={
         Actor.findByIdAndDelete({
             _id:req.params.id
         },function(err,data){
-            if(!err) res.json(data);
+           if(!err) res.json(data);
         });
     },
+
+   
+    
 
     addMovie:function(req,res){
         Actor.findByIdAndUpdate({
