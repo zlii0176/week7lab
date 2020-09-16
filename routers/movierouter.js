@@ -1,9 +1,9 @@
 //post /movies =>insert a movie &&
 //get /movies => get all movies &&
 //get /movies/:year1/:year2 =>get movies between year1 and year2
-//delete /movies/:id => delete a movie by id
+//delete /movies/:id => delete a movie by id &&
 //put /movies/:mId/:aId => remove a actor from a movie or put?
-//post /movies/actors/mId => ("id"=sqfas) aId add actors to moviex
+//post /movies/actors/mId => ("id"=sqfas) aId add actors to moviex &&
 //delete /movies/year1/year2 => delete all movie between year1 and year 2
 
 let mongoose = require("mongoose");
@@ -29,6 +29,42 @@ module.exports={
             res.json(data);
         });
     },
+
+    deleteMovie:function(req,res){
+        Movie.findByIdAndDelete({
+            _id:req.params.id
+        },function(err,data){
+            if(!err) res.json(data);
+            else res.json(err);
+        });
+    },
+
+    addActor:function(req,res){
+        Movie.findByIdAndUpdate({
+            _id:req.params.mId
+        },{
+            $push:{
+                "actors":mongoose.Types.ObjectId(req.body.actors)
+            }
+        },{
+            upsert:false
+        },function(err,data){
+            if(!err) res.json(data);
+        });
+    },
+    removeActor:function(req,res){
+        Movie.findByIdAndUpdate({
+            _id:req.params.mId
+        },{
+            $pull:{
+                "actors":mongoose.Types.ObjectId(req.params.aId)
+            }
+        },{
+            upsert:false
+        },function(err,data){
+            if(!err) res.json(data);
+        });
+    }
 
 
 

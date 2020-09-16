@@ -42,8 +42,13 @@ mongoose.connect(DB_URL,function(err){
 //actor's endpoints
 app.post('/actors',actorRouter.insertActor);
 app.get("/actors",actorRouter.getAllActors);
-
+app.delete("/actors/:id",actorRouter.deleteActor);
+app.put("/actors/movies/:aId",actorRouter.addMovie);
+app.put("/actors/:aId/:mId",actorRouter.removeMovie);
 
 //movie's endpoints
 app.post('/movies',movieRouter.insertMovie);
 app.get('/movies',movieRouter.getAllMovies);
+app.delete("/movies/:id",movieRouter.deleteMovie);
+app.put("/movies/actors/:mId",movieRouter.addActor);
+app.put("/movies/:mId/:aId",movieRouter.removeActor);
